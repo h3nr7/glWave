@@ -1,0 +1,53 @@
+{
+  "name": "Customer",
+  "base": "User",
+  "idInjection": true,
+  "properties": {
+    "email": {
+      "type": "string",
+      "require": false
+    },
+    "userName": {
+      "type": "string",
+      "require": true
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "soundcloudId": {
+      "type": "string",
+      "require": true
+    },
+    "dateAddedToDb": {
+      "type": "date",
+      "require": true
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "soundcloudData": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "self": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "loginWithSoundcloud"
+    }
+  ],
+  "methods": []
+}

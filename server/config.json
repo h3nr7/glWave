@@ -1,0 +1,42 @@
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "port": 3000,
+  "remoting": {
+    "context": {
+      "enableHttpContext": false
+    },
+    "rest": {
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": {
+      "origin": true,
+      "credentials": true
+    },
+    "errorHandler": {
+      "disableStackTrace": false
+    }
+  },
+  "legacyExplorer": false,
+  "services": {
+    "soundcloud":{
+      "url": "http://api.soundcloud.com",
+      "client_id": "afaef62d592f1afb6e844da10e78a33f",
+      "client_secret": "028e44af9f1e313e6b7466214923f769",
+      "callbackUrl": "http://localhost:3000/auth/callback"
+    },
+    "facebook": {
+      "app_id": "1454993268145626",
+      "app_secret": "2de4f9dbb682c7c5842fa471a2b00a70"
+    }
+  }
+}
