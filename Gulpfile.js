@@ -31,7 +31,8 @@ function build_browserify() {
 	return browserify({
 		entries: [paths.app_js],
 		transform: [babelify],
-		extensions: ['.js'],
+		extensions: ['.js', '.jsx'],
+		debug: true, // turn off, crashing chrome
 		paths: ['./node_modules', './client/app']
 	}).bundle()
 		.pipe(plumber())
@@ -55,7 +56,8 @@ gulp.task('develop', function(dev) {
 		env: {NODE_ENV: 'local'},
 	}, forceRestart);
 
-	gulp.watch(['client/**/*'], function() {
+	gulp.watch(['client/app/**'], function() {
+		console.log('rebuild client.')
 		build_browserify();
 		copy_assets();
 		startServer();

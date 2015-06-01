@@ -18,7 +18,13 @@ router.get('/', function(req, res){
 		}));
   	res.end();
   } else {
-  	res.redirect('/auth');
+  	// res.redirect('/auth');
+  	res.write(templateFn({
+			// accessToken: req.session.passport.user.accessToken, 
+			// refreshToken: req.session.passport.user.refreshToken, 
+			// profile: JSON.stringify(req.session.passport.user.profile)
+		}));
+  	res.end();
   }
 })
 
