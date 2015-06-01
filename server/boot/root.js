@@ -3,6 +3,7 @@ const index = require('../pages/index');
 const auth = require('../pages/auth');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 module.exports = function(server) {
   // Install a `/` route that returns server status
