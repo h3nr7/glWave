@@ -9,7 +9,6 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log('main started');
 	}
 
 	componentWillMount() {
@@ -28,12 +27,19 @@ App.contextTypes = {
 	router: React.PropTypes.func
 }
 
-let Home = require('./components/view/Home/Home')
+
+let Home = require('components/view/Home/Home')
+let Visualiser = require('components/view/Visualiser/Visualiser')
 
 let routes = (
-	<Route path="/" handle={App}>
-
+	<Route path="/page" handle={App}>
+		<DefaultRoute name="home" handler={Home} />
+		<Route name="visualiser" path="/page/visualiser" handler={Visualiser} />
+		<NotFoundRoute handler={Home}/>
 	</Route>
 );
 
-Router.run(routes, (Handler) => React.render(<Handler />, document.body));
+Router.run(routes, Router.HistoryLocation, function (Handler) {
+  React.render(<Handler/>, document.body);
+});
+

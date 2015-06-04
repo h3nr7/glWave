@@ -1,17 +1,17 @@
-//- extends ../common/layout
 doctype html
 html
   head
     title= title
-    #{accessToken}
-    //- link(rel='stylesheet', href='assets/css/main.css')
-  body
-    block content
-		  h1= title
-		  p Welcome to #{title}, 
-		  p #{accessToken}
-		  p #{refreshToken}
-		  p #{profile}
-		  div#people
+    link(rel='stylesheet', href='stylesheet/styles.css')
+    script.
+      window.glWave = { accessToken:'#{accessToken}' }
+body
+  block content
+    h1= title
+    p Welcome to #{title}, 
+    p #{accessToken}
+    p #{refreshToken}
+    p #{profile}
+    div#people
 
- 		script(type='text/javascript' src='/js/bundle.js')
+    script(type='text/javascript' src='/js/bundle.js')

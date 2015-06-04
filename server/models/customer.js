@@ -5,6 +5,7 @@ const urljoin = require('url-join');
 
 module.exports = function(Customer) {
 	
+
 	/**
 	 * login with soundcloud
 	 */
@@ -144,7 +145,7 @@ module.exports = function(Customer) {
 			}
 
 			function returnError(err) {
-				console.log('return error')
+				console.log('returnnn error', err)
 				cb(err);
 			}
 

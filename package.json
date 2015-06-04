@@ -35,9 +35,13 @@
     "browserify": "^10.2.3",
     "del": "^1.2.0",
     "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.3.0",
+    "gulp-concat": "^2.5.2",
     "gulp-develop-server": "^0.4.3",
     "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.1",
     "gulp-sourcemaps": "^1.5.2",
+    "jeet": "^6.1.2",
     "jshint": "^2.5.6",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

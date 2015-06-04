@@ -6,12 +6,19 @@ var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 var server = require('gulp-develop-server');
 var babelify = require('babelify');
+var sass = require('gulp-sass');
+var jeet = require('jeet');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
 var del = require('del');
 
 var paths = {
 	app_js: './client/app/main.js',
 	styles: [
-		'./client/app/styles/*.styl'
+		'./client/app/styles/*.scss',
+		'./client/app/styles/_*.scss',
+		'./client/app/components/**/*.scss',
+		'./client/app/components/**/_*.scss'
 	],
 	assets: './client/assets',
 	client: './client'
@@ -20,9 +27,25 @@ var paths = {
 gulp.task('assets', copy_assets);
 function copy_assets() {
 	return gulp.src(paths.assets + '/**')
+		.pipe(concat('styles.css'))
 		.pipe(gulp.dest('client/build/assets'));
 }
 
+/**
+ * build style
+ */
+gulp.task('build:sass', build_sass);
+function build_sass() {
+	return gulp.src(paths.styles)
+		.pipe(sass())
+		.pipe(concat('styles.css'))
+		.pipe(gulp.dest('client/build/stylesheet'));
+};
+
+/**
+ * browserify build js
+ * @type {[type]}
+ */
 gulp.task('build:browserify', build_browserify);
 function build_browserify() {
 	// clean up
@@ -43,6 +66,9 @@ function build_browserify() {
 }
 
 
+/**
+ * run when developing
+ */
 gulp.task('develop', function(dev) {
 
 	var forceRestart = function(err) {
@@ -58,10 +84,12 @@ gulp.task('develop', function(dev) {
 
 	gulp.watch(['client/app/**'], function() {
 		console.log('rebuild client.')
+		build_sass();
 		build_browserify();
 		copy_assets();
 		startServer();
 	});
+
 
 	gulp.watch(['server/**/*.js'], startServer);
 	gulp.watch(['server/**/*.jade'], startServer);

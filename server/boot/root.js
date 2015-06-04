@@ -17,8 +17,10 @@ module.exports = function(server) {
 	router.use(passport.initialize());
 	router.use(passport.session());
 
-  router.use('/', index);
+  router.use('/page', index);
+  router.use('/page/*', index);
   router.use('/auth', auth);
+
   
   server.use(router);
 };
