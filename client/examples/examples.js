@@ -1,40 +1,48 @@
 
 let THREE = require('three');
+let SimpleLines = require('pages/SimpleLines');
+let simpleLinesVs = require('shaders/simpleLinesVs');
+let simpleLinesFs = require('shaders/simpleLinesFs');
 
 class example {
 
 	constructor() {
 		console.log('example begins');
 		this.animate = this.animate.bind(this);
-		this.counter = 0;
-
+		this.sLines = new SimpleLines();
 		this.init();
 		this.animate();
 	}
 
 	init() {
-		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 10000);
-		this.camera.position.z = 300;
+		this.sLines.init()
+
+		this.camera = new THREE.PerspectiveCamera( 30, window.innerWidth/window.innerHeight, 0, 10000 );
+		this.camera.position.z = 400;
 
 		this.scene = new THREE.Scene();
 
-		let geom = new THREE.SphereGeometry(50, 16, 16);
-		let material = new THREE.MeshBasicMaterial( { color: 0xff00ff, wireframe: true } );
-		this.mesh = new THREE.Mesh( geom, material );
+		this.attributes = {}
 
-		this.scene.add(this.mesh);
-		this.renderer = new THREE.WebGLRenderer({canvas: document.getElementById('test') });
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
-	}
+		this.uniforms = {}
+
+		shaderMaterials = new THREE.ShaderMaterial({
+			uniforms: this.uniforms,
+			attributes: this.attribues,
+			vertexShader: simpleLinesVs,
+			fragmentShader: simpleLinesFs,
+			blending: THREE.AddativeBlending,
+			depthTest: false,
+			transparent: true
+		});
+	}	
 
 	animate() {
 
 		requestAnimationFrame(this.animate);
 
-		this.mesh.rotation.x += 0.01;
-		this.mesh.rotation.y += 0.02;
+		this.sLines.render();
 
-		this.renderer.render( this.scene, this.camera );
 	}
 }
 
