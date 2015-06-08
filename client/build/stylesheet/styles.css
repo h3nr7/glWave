@@ -2,6 +2,15 @@ body {
   margin: 0;
   padding: 0; }
 
+.visualiserView {
+  display: block;
+  margin: 0;
+  padding: 0; }
+  .visualiserView__canvas {
+    padding: 0;
+    margin: 0;
+    display: block; }
+
 .homeView {
   color: #3300ff;
   display: block; }

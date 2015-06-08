@@ -14,6 +14,7 @@ var del = require('del');
 
 var paths = {
 	app_js: './client/app/main.js',
+	examples_js: './client/examples/examples.js',
 	styles: [
 		'./client/app/styles/*.scss',
 		'./client/app/styles/_*.scss',
@@ -65,6 +66,22 @@ function build_browserify() {
 		.pipe(gulp.dest('client/build/js'));
 }
 
+gulp.task('build:examples', build_examples);
+function build_examples() {
+	return browserify({
+		entries: [paths.examples_js],
+		transform: [babelify],
+		extensions: ['.js'],
+		debug: true, // turn off, crashing chrome
+		paths: ['./node_modules', './client/examples']
+	}).bundle()
+		.pipe(plumber())
+		.pipe(source('examples.js'))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({loadmaps: true}))
+		.pipe(gulp.dest('client/build/js'));	
+};
+
 
 /**
  * run when developing
@@ -88,6 +105,11 @@ gulp.task('develop', function(dev) {
 		build_browserify();
 		copy_assets();
 		startServer();
+	});
+
+	gulp.watch(['client/examples/**'], function() {
+		console.log('rebuild examples.')
+		build_examples();
 	});
 
 

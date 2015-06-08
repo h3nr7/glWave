@@ -1,0 +1,14 @@
+@import '../../../styles/color.scss';
+
+.visualiserView {
+	display: block;
+	margin: 0;
+	padding: 0;
+
+	&__canvas {
+		padding: 0;
+		margin: 0;
+		display: block;
+	}
+}
+

@@ -9,20 +9,21 @@ router.get('/', function(req, res){
 	if(!_.isEmpty(req.session.passport.user)) {
 
 		app.models.Customer.loginWithSoundcloud( req.session.passport.user.accessToken, function(err, token) {
-			console.log('token', token.id)
+				console.log('token', token.id)
 			res.write(templateFn({
-				accessToken: token.id, 
+				accessToken: token.id
 				// accessToken: req.session.passport.user.accessToken
 				// refreshToken: req.session.passport.user.refreshToken, 
 				// profile: JSON.stringify(req.session.passport.user.profile)
 			}));
-		} );
+			res.end();
+		});
 
   } else {
   	res.write(templateFn());
+  	res.end();
   }
-  
-  res.end();
+
 })
 
 module.exports = router;

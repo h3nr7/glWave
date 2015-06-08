@@ -1,6 +1,7 @@
 
 const index = require('../pages/index');
 const auth = require('../pages/auth');
+const examples = require('../pages/examples');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
@@ -20,6 +21,14 @@ module.exports = function(server) {
   router.use('/page', index);
   router.use('/page/*', index);
   router.use('/auth', auth);
+  router.use('/examples', examples);
+
+  /**
+   * redirect to page
+   */
+  router.get('/', function(req, res) {
+    res.redirect('/page');
+  })
 
   
   server.use(router);
